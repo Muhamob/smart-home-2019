@@ -21,4 +21,15 @@ public class SmartHome {
     public Collection<Room> getRooms() {
         return rooms;
     }
+
+    public Door getDoor(String id) {
+        for (Room room : rooms) {
+            for (Door door : room.getDoors()) {
+                if (door.getId().equals(id)) {
+                    return door;
+                }
+            }
+        }
+        return null;
+    }
 }
