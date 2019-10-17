@@ -2,11 +2,13 @@ package ru.sbt.mipt.oop.homeUtils;
 
 import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.devices.Light;
+import ru.sbt.mipt.oop.devices.SmartDevice;
 import ru.sbt.mipt.oop.homeStructure.*;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class HomeBuilder {
 
@@ -17,35 +19,47 @@ public class HomeBuilder {
 
         Interior interior = new Interior();
         Exterior exterior = new Exterior();
+        List<Premise> premises = Arrays.asList(interior, exterior);
 
         Floor floor = new Floor();
 
-        Room kitchen = new Room(Arrays.asList(
+        List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
                 new Light("2", true),
-                new Door("3", false)),
-                "kitchen");
-        Room bathroom = new Room(Arrays.asList(
+                new Door("3", false)
+        );
+        Room kitchen = new Room("kitchen");
+
+        List<SmartDevice> bathroomDevices = Arrays.asList(
                 new Light("4", true),
-                new Door("5", false)),
-                "bathroom");
-        Room bedroom = new Room(Arrays.asList(
+                new Door("5", false)
+        );
+        Room bathroom = new Room("bathroom");
+
+        List<SmartDevice> bedroomDevices = Arrays.asList(
                 new Light("6", false),
                 new Light("7", false),
                 new Light("8", false),
-                new Door("9", true)),
-                "bedroom");
-        Room hall = new Room(Arrays.asList(
+                new Door("9", true)
+        );
+        Room bedroom = new Room("bedroom");
+
+        List<SmartDevice> hallDevices = Arrays.asList(
                 new Light("10", false),
                 new Light("11", false),
                 new Light("12", false),
-                new Door("13", false)),
-                "hall");
-
+                new Door("13", false)
+        );
+        Room hall = new Room("hall");
 
         floor.setRooms(0, Arrays.asList(kitchen, bathroom, bedroom, hall));
         interior.setFloors(Collections.singletonList(floor));
-        SmartHome smartHome = new SmartHome(interior, exterior);
+
+        SmartHome smartHome = new SmartHome(premises);
+        smartHome.putSmartDevices(kitchenDevices, kitchen);
+        smartHome.putSmartDevices(bathroomDevices, bathroom);
+        smartHome.putSmartDevices(bedroomDevices, bedroom);
+        smartHome.putSmartDevices(hallDevices, hall);
 
         String jsonString = representation.toString(smartHome);
         System.out.println(jsonString);

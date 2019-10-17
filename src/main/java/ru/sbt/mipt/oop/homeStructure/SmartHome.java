@@ -5,9 +5,11 @@ import ru.sbt.mipt.oop.homeStructure.Room;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class SmartHome extends Building {
-    public SmartHome(Interior interior, Exterior exterior) {
-        super(interior, exterior);
+
+    public SmartHome(List<Premise> premises) {
+        super(premises);
     }
 }

@@ -21,7 +21,7 @@ public class EventDoor implements EventHandler {
 //                    System.out.println("Door " + door.getId() + " in room " + room.getName() + " was opened.");
                 } else {
                     door.setOpen(false);
-                    Room room = door.getRoom();
+                    Room room = smartHome.getRoom(door.getId());
                     System.out.println("Door " + door.getId() + " in room " + room.getName() + " was closed.");
                     // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
                     // в этом случае мы хотим автоматически выключить свет во всем доме (это же умный дом!)

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Interior implements HomeComponent {
+public class Interior extends Premise implements HomeComponent {
 
     private Collection<Floor> floors;
 
@@ -23,5 +23,16 @@ public class Interior implements HomeComponent {
         }
 
         return HomeCheckers.getFirstNotNull(smartDevices);
+    }
+
+    @Override
+    public List<SmartDevice> getAllSmartDevices() {
+        List<SmartDevice> smartDevices = new ArrayList<>();
+
+        for (Floor floor : floors) {
+            smartDevices.addAll(floor.getAllSmartDevices());
+        }
+
+        return smartDevices;
     }
 }

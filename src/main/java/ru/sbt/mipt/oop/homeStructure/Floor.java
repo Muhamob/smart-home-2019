@@ -25,4 +25,15 @@ public class Floor implements HomeComponent {
 
         return HomeCheckers.getFirstNotNull(smartDevices);
     }
+
+    @Override
+    public List<SmartDevice> getAllSmartDevices() {
+        List<SmartDevice> smartDevices = new ArrayList<>();
+
+        for (Room room : rooms) {
+            smartDevices.addAll(room.getAllSmartDevices());
+        }
+
+        return smartDevices;
+    }
 }

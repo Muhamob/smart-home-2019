@@ -3,30 +3,69 @@ package ru.sbt.mipt.oop.homeStructure;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 import ru.sbt.mipt.oop.homeUtils.HomeCheckers;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Building implements HomeComponent {
-    private Interior interior;
-    private Exterior exterior;
+    private Map<String, Room> smartDevices;
+    private List<Premise> premises;
 
-    public Building(Interior interior, Exterior exterior) {
-        this.interior = interior;
-        this.exterior = exterior;
+    public Building(List<Premise> premises) {
+        smartDevices = new HashMap<>();
+        this.premises = new ArrayList<>(premises);
+    }
+
+    public void putSmartDevice(SmartDevice smartDevice, Room room) {
+        room.addDevice(smartDevice);
+        smartDevices.put(smartDevice.getId(), room);
+    }
+
+    public void putSmartDevices(Collection<SmartDevice> smartDevices, Room room) {
+        for (SmartDevice smartDevice : smartDevices) {
+            putSmartDevice(smartDevice, room);
+        }
+    }
+
+    public void removeSmartDevice(String id) {
+        Room room = smartDevices.get(id);
+        room.removeDevice(id);
+    }
+
+    public void removeSmartDevices(List<String> ids) {
+        for (String id : ids) {
+            removeSmartDevice(id);
+        }
+    }
+
+    public Room getRoom(String id) {
+        return smartDevices.get(id);
+    }
+
+    public void clearAllSmartDevices() {
+        smartDevices = new HashMap<>();
     }
 
     /*
-            Добавить исключение, если найдено несколько устройств с одинаковым ID
-             */
+    Добавить исключение, если найдено несколько устройств с одинаковым ID
+     */
     @Override
     public SmartDevice getSmartDevice(String id) {
-        System.out.println(interior);
-        System.out.println(exterior);
-        SmartDevice smartDeviceInterior = interior.getSmartDevice(id);
-        SmartDevice smartDeviceExterior = exterior.getSmartDevice(id);
+        List<SmartDevice> smartDevices = new ArrayList<>();
+        System.out.println(premises);
+        for (Premise premise : premises) {
+            smartDevices.add(premise.getSmartDevice(id));
+        }
 
-        List<SmartDevice> foundDevices = Arrays.asList(smartDeviceExterior, smartDeviceInterior);
+        return HomeCheckers.getFirstNotNull(smartDevices);
+    }
 
-        return HomeCheckers.getFirstNotNull(foundDevices);
+    @Override
+    public List<SmartDevice> getAllSmartDevices() {
+        List<SmartDevice> smartDevices = new ArrayList<>();
+
+        for (Premise premise : premises) {
+            smartDevices.addAll(premise.getAllSmartDevices());
+        }
+
+        return smartDevices;
     }
 }

@@ -13,7 +13,7 @@ public class Main {
         EventSource eventSource = new RandomEventSource();
 
         try {
-            Application app = new Application(homeReader, "smart-home-1.js", eventSource);
+            Application app = new Application(homeReader, "output.js", eventSource);
             app.run();
         } catch (IOException e) {
             System.out.println("Something wrong with reading file");
