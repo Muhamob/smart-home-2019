@@ -17,7 +17,8 @@ public class EventLight implements EventHandler {
             // событие от источника света
             Light light = (Light) smartHome.getSmartDevice(event.getObjectId());
             if (light != null) {
-                Room room = smartHome.getRoom(light.getId());
+//                Room room = smartHome.getRoom(light.getId());
+                Room room = null;
                 if (event.getType() == LIGHT_ON) {
                     light.setOn(true);
                     System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");

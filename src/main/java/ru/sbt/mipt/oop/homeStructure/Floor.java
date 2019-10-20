@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop.homeStructure;
 
+import ru.sbt.mipt.oop.actions.ActionableHomeComponent;
+import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 import ru.sbt.mipt.oop.homeUtils.HomeCheckers;
 
@@ -35,5 +37,13 @@ public class Floor implements HomeComponent {
         }
 
         return smartDevices;
+    }
+
+    @Override
+    public void execute(HomeComponentAction action) {
+        action.execute(this);
+        for (Room room : rooms) {
+            room.execute(action);
+        }
     }
 }
