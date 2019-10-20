@@ -11,4 +11,8 @@ public class Door extends SmartDevice {
     public void setOpen(boolean open) {
         isOpen = open;
     }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
 }

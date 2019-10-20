@@ -17,7 +17,7 @@ public class Building implements HomeComponent {
     @Override
     public SmartDevice getSmartDevice(String id) {
         List<SmartDevice> smartDevices = new ArrayList<>();
-        System.out.println(premises);
+
         for (HomeComponent premise : premises) {
             smartDevices.add(premise.getSmartDevice(id));
         }

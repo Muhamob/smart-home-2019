@@ -21,8 +21,6 @@ public class SwitchAllLights implements HomeComponentAction {
 
         if (!(homeComponent instanceof Light)) return false;
 
-        System.out.println(homeComponent);
-
         Light light = (Light) homeComponent;
 
         if (eventType == LIGHT_ON) {
