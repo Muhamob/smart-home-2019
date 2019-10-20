@@ -2,16 +2,16 @@ package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Light;
-import ru.sbt.mipt.oop.devices.SmartDevice;
 import ru.sbt.mipt.oop.homeStructure.HomeComponent;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
-public class SwitchLight implements HomeComponentAction {
+public class SwitchAllLights implements HomeComponentAction {
 
     private final SensorEventType eventType;
 
-    public SwitchLight(SensorEventType eventType) {
+    public SwitchAllLights(SensorEventType eventType) {
         this.eventType = eventType;
     }
 

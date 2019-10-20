@@ -4,6 +4,10 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+/*
+Используется для првильной сериализации объектов с иерархией
+бедь то унаследованные классы или реализации интерфейсов
+ */
 final class InterfaceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T> {
     public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context) {
         final JsonObject wrapper = new JsonObject();

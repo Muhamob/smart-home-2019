@@ -14,9 +14,6 @@ public class Building implements HomeComponent {
         System.out.println(premises);
     }
 
-    /*
-    Добавить исключение, если найдено несколько устройств с одинаковым ID
-     */
     @Override
     public SmartDevice getSmartDevice(String id) {
         List<SmartDevice> smartDevices = new ArrayList<>();

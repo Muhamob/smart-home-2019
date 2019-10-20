@@ -4,11 +4,16 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class TestSource1 implements EventSource {
+
+/*
+Источник событий для проверки действий при закрытии двери в комнате
+с названием hall при стандартной конфигурации дома, взятой из класса
+HomeBuilder
+ */
+public class TestSourceHallDoorClosing implements EventSource {
 
     List<SensorEvent> events = Arrays.asList(
             new SensorEvent(SensorEventType.DOOR_OPEN, "5"), // open door in barhroom

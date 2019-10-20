@@ -32,7 +32,6 @@ public class SwitchDoorStateById implements HomeComponentAction {
                 door.setOpen(false);
                 System.out.println("Door " + id + " is now closed");
             }
-
             return true;
         }
 

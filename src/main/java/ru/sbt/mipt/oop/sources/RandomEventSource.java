@@ -3,8 +3,11 @@ package ru.sbt.mipt.oop.sources;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 
+/*
+Источник случайных событий
+Параметры источника не менял
+ */
 public class RandomEventSource implements EventSource {
-
     @Override
     public SensorEvent getNextSensorEvent() {
         // pretend like we're getting the events from physical world, but here we're going to just generate some random events

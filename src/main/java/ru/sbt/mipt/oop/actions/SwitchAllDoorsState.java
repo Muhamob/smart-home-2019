@@ -7,11 +7,12 @@ import ru.sbt.mipt.oop.homeStructure.HomeComponent;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
-public class SwitchDoorState implements HomeComponentAction {
+
+public class SwitchAllDoorsState implements HomeComponentAction {
 
     private final SensorEventType eventType;
 
-    public SwitchDoorState(SensorEventType eventType) {
+    public SwitchAllDoorsState(SensorEventType eventType) {
         this.eventType = eventType;
     }
 

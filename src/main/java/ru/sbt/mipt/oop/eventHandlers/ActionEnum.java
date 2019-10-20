@@ -7,7 +7,7 @@ import ru.sbt.mipt.oop.actions.SwitchLightById;
 
 /*
 Конфигурационный код
-Чтобы добавить ещё одно событие нужно дописать EVENTSMTH(new EventSmth());
+Чтобы добавить ещё одно действие нужно дописать ACTION_SMTH { @Override HomeComp.... };
  */
 public enum ActionEnum {
     ACTION_DOOR {

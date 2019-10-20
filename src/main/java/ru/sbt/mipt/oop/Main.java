@@ -3,14 +3,14 @@ package ru.sbt.mipt.oop;
 import ru.sbt.mipt.oop.homeUtils.HomeReader;
 import ru.sbt.mipt.oop.homeUtils.JsonHomeReader;
 import ru.sbt.mipt.oop.sources.EventSource;
-import ru.sbt.mipt.oop.sources.TestSource1;
+import ru.sbt.mipt.oop.sources.TestSourceHallDoorClosing;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         HomeReader homeReader = new JsonHomeReader();
-        EventSource eventSource = new TestSource1();
+        EventSource eventSource = new TestSourceHallDoorClosing();
 
         try {
             Application app = new Application(

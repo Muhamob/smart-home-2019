@@ -6,9 +6,7 @@ import ru.sbt.mipt.oop.devices.SmartDevice;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-Not implemented yet
- */
+
 public class Exterior extends Premise implements HomeComponent {
 
     private List<HomeComponent> homeComponents;

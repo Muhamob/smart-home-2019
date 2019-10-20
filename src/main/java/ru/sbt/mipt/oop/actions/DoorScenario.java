@@ -34,7 +34,7 @@ public class DoorScenario implements HomeComponentAction {
             if (executed_ && room.getName().equals("hall")) {
                 System.out.println(room.getName());
                 System.out.println(room.getAllSmartDevices());
-                home.execute(new SwitchLight(LIGHT_OFF));
+                home.execute(new SwitchAllLights(LIGHT_OFF));
                 return true;
             }
 
