@@ -28,7 +28,12 @@ public class SmartDevice implements HomeComponent {
     }
 
     @Override
-    public void execute(HomeComponentAction action) {
-        action.execute(this);
+    public boolean execute(HomeComponentAction action) {
+        return action.execute(this);
+    }
+
+    @Override
+    public boolean contains(String id) {
+        return id.equals(this.id);
     }
 }

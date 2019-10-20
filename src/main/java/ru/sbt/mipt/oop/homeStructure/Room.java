@@ -1,8 +1,6 @@
 package ru.sbt.mipt.oop.homeStructure;
 
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
-import ru.sbt.mipt.oop.devices.Door;
-import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 
 import java.util.*;
@@ -43,10 +41,20 @@ public class Room implements HomeComponent {
     }
 
     @Override
-    public void execute(HomeComponentAction action) {
-        action.execute(this);
+    public boolean execute(HomeComponentAction action) {
+        boolean executed = action.execute(this);
         for (SmartDevice device : smartDevices.values()) {
-            device.execute(action);
+            executed |= device.execute(action);
         }
+
+        return executed;
+    }
+
+    @Override
+    public boolean contains(String id) {
+        for (SmartDevice device_ : smartDevices.values()) {
+            if (device_.contains(id)) return true;
+        }
+        return false;
     }
 }

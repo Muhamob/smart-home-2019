@@ -1,85 +1,127 @@
 {
   "premises": [
     {
-      "floors": [
-        {
-          "floor": 0,
-          "rooms": [
-            {
-              "smartDevices": {
-                "1": {
-                  "isOn": false,
-                  "id": "1"
+      "type": "ru.sbt.mipt.oop.homeStructure.Interior",
+      "data": {
+        "floors": [
+          {
+            "floor": 0,
+            "rooms": [
+              {
+                "smartDevices": {
+                  "1": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "1"
+                    }
+                  },
+                  "2": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": true,
+                      "id": "2"
+                    }
+                  },
+                  "3": {
+                    "type": "ru.sbt.mipt.oop.devices.Door",
+                    "data": {
+                      "isOpen": false,
+                      "id": "3"
+                    }
+                  }
                 },
-                "2": {
-                  "isOn": true,
-                  "id": "2"
-                },
-                "3": {
-                  "isOpen": false,
-                  "id": "3"
-                }
+                "name": "kitchen"
               },
-              "name": "kitchen"
-            },
-            {
-              "smartDevices": {
-                "4": {
-                  "isOn": true,
-                  "id": "4"
+              {
+                "smartDevices": {
+                  "4": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": true,
+                      "id": "4"
+                    }
+                  },
+                  "5": {
+                    "type": "ru.sbt.mipt.oop.devices.Door",
+                    "data": {
+                      "isOpen": false,
+                      "id": "5"
+                    }
+                  }
                 },
-                "5": {
-                  "isOpen": false,
-                  "id": "5"
-                }
+                "name": "bathroom"
               },
-              "name": "bathroom"
-            },
-            {
-              "smartDevices": {
-                "6": {
-                  "isOn": false,
-                  "id": "6"
+              {
+                "smartDevices": {
+                  "6": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "6"
+                    }
+                  },
+                  "7": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "7"
+                    }
+                  },
+                  "8": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "8"
+                    }
+                  },
+                  "9": {
+                    "type": "ru.sbt.mipt.oop.devices.Door",
+                    "data": {
+                      "isOpen": true,
+                      "id": "9"
+                    }
+                  }
                 },
-                "7": {
-                  "isOn": false,
-                  "id": "7"
-                },
-                "8": {
-                  "isOn": false,
-                  "id": "8"
-                },
-                "9": {
-                  "isOpen": true,
-                  "id": "9"
-                }
+                "name": "bedroom"
               },
-              "name": "bedroom"
-            },
-            {
-              "smartDevices": {
-                "11": {
-                  "isOn": false,
-                  "id": "11"
+              {
+                "smartDevices": {
+                  "11": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "11"
+                    }
+                  },
+                  "12": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "12"
+                    }
+                  },
+                  "13": {
+                    "type": "ru.sbt.mipt.oop.devices.Door",
+                    "data": {
+                      "isOpen": false,
+                      "id": "13"
+                    }
+                  },
+                  "10": {
+                    "type": "ru.sbt.mipt.oop.devices.Light",
+                    "data": {
+                      "isOn": false,
+                      "id": "10"
+                    }
+                  }
                 },
-                "12": {
-                  "isOn": false,
-                  "id": "12"
-                },
-                "13": {
-                  "isOpen": false,
-                  "id": "13"
-                },
-                "10": {
-                  "isOn": false,
-                  "id": "10"
-                }
-              },
-              "name": "hall"
-            }
-          ]
-        }
-      ]
+                "name": "hall"
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

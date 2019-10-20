@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.homeStructure;
 
-import ru.sbt.mipt.oop.actions.ActionableHomeComponent;
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 
@@ -29,9 +28,20 @@ public class Exterior extends Premise implements HomeComponent {
     }
 
     @Override
-    public void execute(HomeComponentAction action) {
+    public boolean execute(HomeComponentAction action) {
+        boolean executed = false;
         for (HomeComponent homeComponent : homeComponents) {
-            homeComponent.execute(action);
+            executed |= homeComponent.execute(action);
         }
+
+        return executed;
+    }
+
+    @Override
+    public boolean contains(String id) {
+        for (HomeComponent homeComponent : homeComponents) {
+            if (homeComponent.contains(id)) return true;
+        }
+        return false;
     }
 }

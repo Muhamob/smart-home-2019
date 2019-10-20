@@ -12,6 +12,10 @@ public class Interior extends Premise implements HomeComponent {
 
     private Collection<Floor> floors;
 
+    public Interior() {
+        super();
+    }
+
     public void setFloors(Collection<Floor> floors) {
         this.floors = floors;
     }
@@ -38,10 +42,19 @@ public class Interior extends Premise implements HomeComponent {
     }
 
     @Override
-    public void execute(HomeComponentAction action) {
-        action.execute(this);
+    public boolean execute(HomeComponentAction action) {
+        boolean executed = action.execute(this);
         for (Floor floor : floors) {
-            floor.execute(action);
+            executed |= floor.execute(action);
         }
+        return executed;
+    }
+
+    @Override
+    public boolean contains(String id) {
+        for (Floor floor : floors) {
+            if (floor.contains(id)) return true;
+        }
+        return false;
     }
 }

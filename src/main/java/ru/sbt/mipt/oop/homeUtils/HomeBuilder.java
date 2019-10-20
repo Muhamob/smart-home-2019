@@ -18,9 +18,9 @@ public class HomeBuilder {
         HomeSaver homeSaver = new HomeSaver("new-home-by-new-project.js");
 
         Interior interior = new Interior();
-        List<Premise> premises = Collections.singletonList(interior);
+        List<HomeComponent> premises = Collections.singletonList(interior);
 
-        Floor floor = new Floor();
+        Floor floor = new Floor(0);
 
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
@@ -51,7 +51,7 @@ public class HomeBuilder {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(0, Arrays.asList(kitchen, bathroom, bedroom, hall));
+        floor.setRooms(Arrays.asList(kitchen, bathroom, bedroom, hall));
         interior.setFloors(Collections.singletonList(floor));
 
         SmartHome smartHome = new SmartHome(premises);
