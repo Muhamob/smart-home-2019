@@ -5,8 +5,9 @@ public enum SensorEventType {
 
     private String code;
 
-    public void setCode(String code) {
+    public SensorEventType setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public String getCode() {
