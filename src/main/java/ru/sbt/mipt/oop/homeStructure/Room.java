@@ -36,7 +36,7 @@ public class Room implements Actionable {
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (SmartDevice device : smartDevices.values()) {
-            executed |= device.execute(action);
+            device.execute(action);
         }
 
         return executed;

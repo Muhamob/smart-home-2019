@@ -28,4 +28,16 @@ public class Alarm extends SmartDevice {
     public void invokeAlarm() {
         alarmState = alarmState.invokeAlert();
     }
+
+    public boolean isActivated() {
+        return alarmState.getClass() == AlarmActivated.class;
+    }
+
+    public boolean isAlerting() {
+        return alarmState.getClass() == AlarmAlert.class;
+    }
+
+    public boolean isDeactivated() {
+        return alarmState.getClass() == AlarmDeactivated.class;
+    }
 }
