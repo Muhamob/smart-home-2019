@@ -30,59 +30,71 @@ public class ActivateAlarmInSmartHomeTest {
         floor.setRooms(Collections.singletonList(kitchen));
         interior.setFloors(Collections.singletonList(floor));
 
-        return new SmartHome(premises);
+        return new SmartHome(premises, "10");
     }
 
     @Test
     void checkAlarmActivates() {
         SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = (Alarm) home.getSmartDevice("10");
+        Alarm alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
 
         SensorEvent event = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, event);
-        alarm = (Alarm) home.getSmartDevice("10");
+        alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmActivated.class);
     }
 
     @Test
     void checkAlarmDeactivatesWithCorrectPassword() {
         SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = (Alarm) home.getSmartDevice("10");
+        Alarm alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
 
         SensorEvent eventActivateAlarm = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, eventActivateAlarm);
-        alarm = (Alarm) home.getSmartDevice("10");
+        alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmActivated.class);
 
         SensorEvent eventDeactivateAlarm = new SensorEvent(SensorEventType.ALARM_DEACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, eventDeactivateAlarm);
-        alarm = (Alarm) home.getSmartDevice("10");
+        alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
     }
 
     @Test
     void checkAlarmDeactivatesWithWrongPassword() {
         SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = (Alarm) home.getSmartDevice("10");
+        Alarm alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
 
         SensorEvent eventActivateAlarm = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, eventActivateAlarm);
-        alarm = (Alarm) home.getSmartDevice("10");
+        alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmActivated.class);
 
         // В данном случае приходит событие о деактивации сигнализации с заведомо ложным паролем
         SensorEvent eventDeactivateAlarm = new SensorEvent(SensorEventType.ALARM_DEACTIVATE.setCode("1001"), "10");
 
         EventList.run(home, eventDeactivateAlarm);
-        alarm = (Alarm) home.getSmartDevice("10");
+        alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmAlert.class);
+    }
+
+    @Test
+    void sendingSMSWhileActionWithActivatedAlarm() {
+        SmartHome home = createSmartHomeWithAlarm();
+        Alarm alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
+
+        SensorEvent eventActivateAlarm = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
+        EventList.run(home, eventActivateAlarm);
+
+        SensorEvent turnOnLight = new SensorEvent(SensorEventType.LIGHT_ON, "1");
+        EventList.run(home, turnOnLight);
     }
 
 }

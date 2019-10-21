@@ -98,6 +98,8 @@ class SwitchDoorStateByIdTest {
 
         for (SmartDevice device : home.getAllSmartDevices()) {
             if (device instanceof Light) {
+                System.out.println(((Light) device).isOn());
+                System.out.println(device.getId());
                 assertFalse(((Light) device).isOn());
             }
         }
