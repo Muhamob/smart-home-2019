@@ -12,6 +12,10 @@ public class Alarm extends SmartDevice {
         alarmState = alarmState.activate(code);
     }
 
+    public AlarmState getAlarmState() {
+        return alarmState;
+    }
+
     /*
     false - в случае если сработала сигнализация
     true - код верен, сигнализация успешно установлена
@@ -22,6 +26,6 @@ public class Alarm extends SmartDevice {
     }
 
     public void invokeAlarm() {
-        alarmState = new AlarmActivated(alarmState.getCode());
+        alarmState = alarmState.invokeAlert();
     }
 }
