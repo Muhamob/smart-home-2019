@@ -66,7 +66,7 @@ public class ActivateAlarmInSmartHomeTest {
     }
 
     @Test
-    void checkAlarmDeactivatesWithWrongPassword() {
+    void checkAlarmAlertWithWrongPassword() {
         SmartHome home = createSmartHomeWithAlarm();
         Alarm alarm = (Alarm) home.getSmartDevice(home.getAlarmId());
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
