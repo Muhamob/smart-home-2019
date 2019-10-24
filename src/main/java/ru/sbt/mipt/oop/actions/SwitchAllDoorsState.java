@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.actions;
 
+import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.homeStructure.HomeComponent;
@@ -12,8 +13,8 @@ public class SwitchAllDoorsState implements HomeComponentAction {
 
     private final SensorEventType eventType;
 
-    public SwitchAllDoorsState(SensorEventType eventType) {
-        this.eventType = eventType;
+    public SwitchAllDoorsState(SensorEvent event) {
+        this.eventType = event.getType();
     }
 
     @Override

@@ -4,17 +4,15 @@ import org.junit.jupiter.api.Test;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.actions.SwitchAllLights;
-import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.devices.SmartDevice;
-import ru.sbt.mipt.oop.eventHandlers.EventList;
 import ru.sbt.mipt.oop.homeStructure.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SwitchAllLightsTest {
     @Test
@@ -47,8 +45,7 @@ public class SwitchAllLightsTest {
 
         SmartHome home = new SmartHome(premises);
 
-        SensorEvent event = new SensorEvent(SensorEventType.LIGHT_ON, "5");
-        home.execute(new SwitchAllLights(SensorEventType.LIGHT_ON));
+        home.execute(new SwitchAllLights(new SensorEvent(SensorEventType.LIGHT_ON, null)));
 
         for (SmartDevice device : home.getAllSmartDevices()) {
             Light light = (Light) device;
