@@ -15,12 +15,8 @@ public class Application {
 
     public Application(HomeReader homeReader, String homePath, EventSource source) throws IOException {
         this.homeReader = homeReader;
-        this.smartHome = readHome(homePath);
+        this.smartHome = homeReader.readHome(homePath);
         this.eventSource = source;
-    }
-
-    private SmartHome readHome(String path) throws IOException{
-        return homeReader.readHome(path);
     }
 
     /*

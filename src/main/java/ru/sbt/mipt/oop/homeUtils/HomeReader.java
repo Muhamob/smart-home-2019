@@ -5,5 +5,5 @@ import ru.sbt.mipt.oop.homeStructure.SmartHome;
 import java.io.IOException;
 
 public interface HomeReader {
-    public SmartHome readHome(String path) throws IOException;
+    public SmartHome readHome(String path);
 }
