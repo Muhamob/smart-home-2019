@@ -1,8 +1,7 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.eventHandlers.EventList;
 import ru.sbt.mipt.oop.homeUtils.HomeReader;
-import ru.sbt.mipt.oop.sources.EventSource;
+import ru.sbt.mipt.oop.sources.EventManager;
 
 import java.io.IOException;
 
@@ -10,33 +9,16 @@ public class Application {
 
     private final HomeReader homeReader;
     private final SmartHome smartHome;
-    private final EventSource eventSource;
+    private final EventManager eventManager;
 
-    public Application(HomeReader homeReader, String homePath, EventSource source) throws IOException {
+    public Application(HomeReader homeReader, String homePath, EventManager eventManager) throws IOException {
         this.homeReader = homeReader;
-        this.smartHome = readHome(homePath);
-        this.eventSource = source;
-    }
-
-    private SmartHome readHome(String path) throws IOException{
-        return homeReader.readHome(path);
-    }
-
-    /*
-    Метод для обработки одного события
-     */
-    private void handleEvent(SensorEvent event) {
-        System.out.println("Got event: " + event);
-        EventList.run(smartHome, event);
+        this.eventManager = eventManager;
+        this.smartHome = homeReader.readHome(homePath);
     }
 
     public void run() {
-        SensorEvent event = eventSource.getNextSensorEvent();
-
-        while (event != null) {
-            handleEvent(event);
-            event = getNextSensorEvent();
-        }
+        eventManager.manage(smartHome);
     }
 
     private static void sendCommand(SensorCommand command) {
