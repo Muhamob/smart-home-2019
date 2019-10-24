@@ -45,7 +45,7 @@ public class Interior extends Premise implements HomeComponent {
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (Floor floor : floors) {
-            floor.execute(action);
+            executed |= floor.execute(action);
         }
         return executed;
     }

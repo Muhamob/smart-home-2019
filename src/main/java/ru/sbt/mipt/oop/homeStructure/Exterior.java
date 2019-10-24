@@ -29,7 +29,7 @@ public class Exterior extends Premise implements HomeComponent {
     public boolean execute(HomeComponentAction action) {
         boolean executed = false;
         for (HomeComponent homeComponent : homeComponents) {
-            homeComponent.execute(action);
+            executed |= homeComponent.execute(action);
         }
 
         return executed;

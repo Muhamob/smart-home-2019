@@ -12,6 +12,7 @@ import ru.sbt.mipt.oop.homeStructure.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -98,8 +99,8 @@ class SwitchDoorStateByIdTest {
 
         for (SmartDevice device : home.getAllSmartDevices()) {
             if (device instanceof Light) {
+                System.out.println("light id " + device.getId());
                 System.out.println(((Light) device).isOn());
-                System.out.println(device.getId());
                 assertFalse(((Light) device).isOn());
             }
         }

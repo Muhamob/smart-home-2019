@@ -40,7 +40,7 @@ public class Building implements HomeComponent {
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (HomeComponent premise : premises) {
-            premise.execute(action);
+            executed |= premise.execute(action);
         }
 
         return executed;

@@ -44,7 +44,7 @@ public class Floor implements HomeComponent {
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (Room room : rooms) {
-            room.execute(action);
+            executed |= room.execute(action);
         }
 
         return executed;

@@ -12,6 +12,12 @@ import ru.sbt.mipt.oop.actions.SwitchLightById;
 Чтобы добавить ещё одно действие нужно дописать ACTION_SMTH { @Override HomeComp.... };
  */
 public enum ActionEnum {
+    ALARM_ACTION {
+        @Override
+        public HomeComponentAction getAction(SensorEvent event) {
+            return new AlarmAction(event);
+        }
+    },
     ACTION_DOOR {
         @Override
         public HomeComponentAction getAction(SensorEvent event) {
@@ -22,12 +28,6 @@ public enum ActionEnum {
         @Override
         public HomeComponentAction getAction(SensorEvent event) {
             return new SwitchLightById(event);
-        }
-    },
-    ALARM_ACTION {
-        @Override
-        public HomeComponentAction getAction(SensorEvent event) {
-            return new AlarmAction(event);
         }
     };
 
