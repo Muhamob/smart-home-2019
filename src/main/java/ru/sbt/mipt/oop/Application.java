@@ -15,12 +15,8 @@ public class Application {
 
     public Application(HomeReader homeReader, String homePath, EventSource source) throws IOException {
         this.homeReader = homeReader;
-        this.smartHome = readHome(homePath);
+        this.smartHome = homeReader.readHome(homePath);
         this.eventSource = source;
-    }
-
-    private SmartHome readHome(String path) throws IOException{
-        return homeReader.readHome(path);
     }
 
     /*
@@ -38,9 +34,5 @@ public class Application {
             handleEvent(event);
             event = eventSource.getNextSensorEvent();
         }
-    }
-
-    private static void sendCommand(SensorCommand command) {
-        System.out.println("Pretent we're sending command " + command);
     }
 }

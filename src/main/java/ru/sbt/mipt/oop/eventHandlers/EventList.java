@@ -10,7 +10,7 @@ import ru.sbt.mipt.oop.homeStructure.SmartHome;
 public class EventList {
     public static void run(SmartHome smartHome, SensorEvent event) {
         for (ActionEnum eventAction : ActionEnum.values()) {
-            HomeComponentAction action = eventAction.getAction(event.getType(), event.getObjectId());
+            HomeComponentAction action = eventAction.getAction(event);
 
             // Декоратор для событий, если сигнализация забила тревогу
             if (smartHome.getSmartDevice(smartHome.getAlarmId()) != null) {

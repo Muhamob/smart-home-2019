@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.actions;
 
+import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.homeStructure.HomeComponent;
 import ru.sbt.mipt.oop.homeStructure.Room;
@@ -10,10 +11,12 @@ import static ru.sbt.mipt.oop.SensorEventType.*;
 public class DoorScenario implements HomeComponentAction {
     private final SensorEventType eventType;
     private final String eventId;
+    private final SensorEvent event;
 
-    public DoorScenario(SensorEventType eventType, String eventId) {
-        this.eventType = eventType;
-        this.eventId = eventId;
+    public DoorScenario(SensorEvent event) {
+        this.eventType = event.getType();
+        this.eventId = event.getObjectId();
+        this.event = event;
     }
 
     @Override
@@ -28,11 +31,11 @@ public class DoorScenario implements HomeComponentAction {
             if (!(homeComponent1 instanceof Room)) return false;
 
             Room room = (Room) homeComponent1;
-            boolean executed_ = room.execute(new SwitchDoorStateById(eventType, eventId));
+            boolean executed_ = room.execute(new SwitchDoorStateById(event));
 
             // executed means that smart device in that room
             if (executed_ && room.getName().equals("hall")) {
-                home.execute(new SwitchAllLights(LIGHT_OFF));
+                home.execute(new SwitchAllLights(new SensorEvent(LIGHT_OFF, null)));
                 return true;
             }
 

@@ -47,8 +47,7 @@ public class SwitchAllLightsTest {
 
         SmartHome home = new SmartHome(premises);
 
-        SensorEvent event = new SensorEvent(SensorEventType.LIGHT_ON, "5");
-        home.execute(new SwitchAllLights(SensorEventType.LIGHT_ON));
+        home.execute(new SwitchAllLights(new SensorEvent(SensorEventType.LIGHT_ON, null)));
 
         for (SmartDevice device : home.getAllSmartDevices()) {
             Light light = (Light) device;

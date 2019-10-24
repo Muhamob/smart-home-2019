@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.eventHandlers;
 
+import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.actions.AlarmAction;
 import ru.sbt.mipt.oop.actions.DoorScenario;
@@ -13,22 +14,22 @@ import ru.sbt.mipt.oop.actions.SwitchLightById;
 public enum ActionEnum {
     ACTION_DOOR {
         @Override
-        public HomeComponentAction getAction(SensorEventType eventType, String id) {
-            return new DoorScenario(eventType, id);
+        public HomeComponentAction getAction(SensorEvent event) {
+            return new DoorScenario(event);
         }
     },
     ACTION_LIGHT {
         @Override
-        public HomeComponentAction getAction(SensorEventType eventType, String id) {
-            return new SwitchLightById(eventType, id);
+        public HomeComponentAction getAction(SensorEvent event) {
+            return new SwitchLightById(event);
         }
     },
     ALARM_ACTION {
         @Override
-        public HomeComponentAction getAction(SensorEventType eventType, String id) {
-            return new AlarmAction(eventType);
+        public HomeComponentAction getAction(SensorEvent event) {
+            return new AlarmAction(event);
         }
     };
 
-    public abstract HomeComponentAction getAction(SensorEventType eventType, String id);
+    public abstract HomeComponentAction getAction(SensorEvent event);
 }

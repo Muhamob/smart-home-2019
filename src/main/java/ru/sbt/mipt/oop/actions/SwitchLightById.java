@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.actions;
 
+import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.homeStructure.HomeComponent;
@@ -11,9 +12,9 @@ public class SwitchLightById implements HomeComponentAction {
     private final String lightId;
     private final SensorEventType eventType;
 
-    public SwitchLightById(SensorEventType eventType, String lightId) {
-        this.lightId = lightId;
-        this.eventType = eventType;
+    public SwitchLightById(SensorEvent event) {
+        this.lightId = event.getObjectId();
+        this.eventType = event.getType();
     }
 
     @Override
