@@ -47,9 +47,18 @@ public class SwitchAllLightsTest {
 
         home.execute(new SwitchAllLights(new SensorEvent(SensorEventType.LIGHT_ON, null)));
 
-        for (SmartDevice device : home.getAllSmartDevices()) {
-            Light light = (Light) device;
-            assertTrue(light.isOn());
+        for (int i=1; i<11; i++) {
+            String id = Integer.toString(i);
+            home.execute(x->{
+                if (x instanceof Light) {
+                    Light light = (Light) x;
+                    if (light.getId().equals(id)) {
+                        assertTrue(light.isOn());
+                        return true;
+                    }
+                }
+                return false;
+            });
         }
     }
 }

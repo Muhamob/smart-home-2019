@@ -21,27 +21,6 @@ public class Interior extends Premise implements HomeComponent {
     }
 
     @Override
-    public SmartDevice getSmartDevice(String id) {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-        for (Floor floor : floors) {
-            smartDevices.add(floor.getSmartDevice(id));
-        }
-
-        return HomeCheckers.getFirstNotNull(smartDevices);
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-
-        for (Floor floor : floors) {
-            smartDevices.addAll(floor.getAllSmartDevices());
-        }
-
-        return smartDevices;
-    }
-
-    @Override
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (Floor floor : floors) {

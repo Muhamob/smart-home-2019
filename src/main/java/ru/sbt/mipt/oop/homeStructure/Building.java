@@ -15,28 +15,6 @@ public class Building implements HomeComponent {
     }
 
     @Override
-    public SmartDevice getSmartDevice(String id) {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-
-        for (HomeComponent premise : premises) {
-            smartDevices.add(premise.getSmartDevice(id));
-        }
-
-        return HomeCheckers.getFirstNotNull(smartDevices);
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-
-        for (HomeComponent premise : premises) {
-            smartDevices.addAll(premise.getAllSmartDevices());
-        }
-
-        return smartDevices;
-    }
-
-    @Override
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (HomeComponent premise : premises) {

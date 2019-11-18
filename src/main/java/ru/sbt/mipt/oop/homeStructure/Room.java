@@ -22,22 +22,12 @@ public class Room implements HomeComponent {
         this.name = name;
     }
 
-    @Override
-    public SmartDevice getSmartDevice(String id) {
-        return smartDevices.get(id);
-    }
-
     public void addDevice(SmartDevice device) {
         this.smartDevices.put(device.getId(), device);
     }
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        return new ArrayList<>(this.smartDevices.values());
     }
 
     @Override

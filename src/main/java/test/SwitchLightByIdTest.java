@@ -39,10 +39,43 @@ public class SwitchLightByIdTest {
         SensorEvent event = new SensorEvent(SensorEventType.LIGHT_ON, "5");
         EventList.run(home, event);
 
-        assertTrue(((Light) home.getSmartDevice("5")).isOn());
+        home.execute(x -> {
+            if (x instanceof Light) {
+                Light light = (Light) x;
+                if (light.getId().equals("5")) {
+                    assertTrue(light.isOn());
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        home.execute(x -> {
+            if (x instanceof Light) {
+                Light light = (Light) x;
+                if (light.getId().equals("5")) {
+                    assertTrue(light.isOn());
+                    return true;
+                }
+            }
+
+            return false;
+        });
 
         for (int i=1; i < 5; i++) {
-            assertFalse(((Light) home.getSmartDevice(Integer.toString(i))).isOn());
+            String id = Integer.toString(i);
+            home.execute(x -> {
+                if (x instanceof Light) {
+                    Light light = (Light) x;
+                    if (light.getId().equals(id)) {
+                        assertFalse(light.isOn());
+                        return true;
+                    }
+                }
+
+                return false;
+            });
         }
     }
 }

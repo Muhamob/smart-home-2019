@@ -16,16 +16,6 @@ public class Exterior extends Premise implements HomeComponent {
     }
 
     @Override
-    public SmartDevice getSmartDevice(String id) {
-        return null;
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        return null;
-    }
-
-    @Override
     public boolean execute(HomeComponentAction action) {
         boolean executed = false;
         for (HomeComponent homeComponent : homeComponents) {

@@ -20,27 +20,6 @@ public class Floor implements HomeComponent {
     }
 
     @Override
-    public SmartDevice getSmartDevice(String id) {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-        for (Room room : rooms) {
-            smartDevices.add(room.getSmartDevice(id));
-        }
-
-        return HomeCheckers.getFirstNotNull(smartDevices);
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-
-        for (Room room : rooms) {
-            smartDevices.addAll(room.getAllSmartDevices());
-        }
-
-        return smartDevices;
-    }
-
-    @Override
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
         for (Room room : rooms) {

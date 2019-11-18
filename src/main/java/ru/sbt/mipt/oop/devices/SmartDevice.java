@@ -18,16 +18,6 @@ public class SmartDevice implements HomeComponent {
     }
 
     @Override
-    public SmartDevice getSmartDevice(String id) {
-        return this;
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        return Collections.singletonList(this);
-    }
-
-    @Override
     public boolean execute(HomeComponentAction action) {
         return action.execute(this);
     }
