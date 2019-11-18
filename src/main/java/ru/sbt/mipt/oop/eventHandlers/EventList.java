@@ -5,19 +5,13 @@ import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public class EventList {
     public static void run(SmartHome smartHome, SensorEvent event) {
+        List<HomeComponentAction> actions = EventCollectionCreator.getActionList(event);
 
-        for (Class eventActionClass : ActionsConfig.getActions()) {
-            HomeComponentAction action = null;
-            try {
-                action = (HomeComponentAction) eventActionClass.getConstructor(SensorEvent.class).newInstance(event);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-
-            assert action != null;
+        for (HomeComponentAction action : actions) {
             smartHome.execute(action);
         }
     }
