@@ -18,10 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SwitchLightByIdTest {
     @Test
     public void turnOnOneLight() {
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
 
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
@@ -32,10 +28,7 @@ public class SwitchLightByIdTest {
         );
         Room kitchen = new Room("kitchen", kitchenDevices);
 
-        floor.setRooms(Collections.singletonList(kitchen));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Collections.singletonList(kitchen));
         SensorEvent event = new SensorEvent(SensorEventType.LIGHT_ON, "5");
         EventList.run(home, event);
 

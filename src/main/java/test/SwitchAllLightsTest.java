@@ -17,10 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SwitchAllLightsTest {
     @Test
     public void turnOnAllLight() {
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
 
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
@@ -40,10 +36,7 @@ public class SwitchAllLightsTest {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(Arrays.asList(kitchen, hall));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Arrays.asList(kitchen, hall));
 
         home.execute(new SwitchAllLights(new SensorEvent(SensorEventType.LIGHT_ON, null)));
 

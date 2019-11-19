@@ -17,11 +17,6 @@ public class HomeBuilder {
         StringRepresentation representation = new JsonRepresentation();
         HomeSaver homeSaver = new HomeSaver("new-home-by-new-project.js");
 
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
-
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
                 new Light("2", true),
@@ -51,10 +46,7 @@ public class HomeBuilder {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(Arrays.asList(kitchen, bathroom, bedroom, hall));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome smartHome = new SmartHome(premises);
+        SmartHome smartHome = new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
 
         String jsonString = representation.toString(smartHome);
         System.out.println(jsonString);

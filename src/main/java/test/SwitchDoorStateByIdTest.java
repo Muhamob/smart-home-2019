@@ -19,12 +19,6 @@ class SwitchDoorStateByIdTest {
 
     @Test
     void testCloseSomeDoor() {
-
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
-
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Door("1", true),
                 new Door("2", false),
@@ -34,10 +28,7 @@ class SwitchDoorStateByIdTest {
         );
         Room kitchen = new Room("kitchen", kitchenDevices);
 
-        floor.setRooms(Collections.singletonList(kitchen));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Collections.singletonList(kitchen));
 
         boolean[] doorStates = new boolean[4];
         Door door_;
@@ -90,11 +81,6 @@ class SwitchDoorStateByIdTest {
 
     @Test
     void testCloseHallDoor() {
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
-
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", true),
                 new Light("2", false),
@@ -112,10 +98,7 @@ class SwitchDoorStateByIdTest {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(Arrays.asList(kitchen, hall));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Arrays.asList(kitchen, hall));
 
         SensorEvent event = new SensorEvent(SensorEventType.DOOR_CLOSED, "9");
         EventList.run(home, event);
