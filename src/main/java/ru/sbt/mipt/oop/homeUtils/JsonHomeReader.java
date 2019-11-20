@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop.homeUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.sbt.mipt.oop.devices.SmartDevice;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 import java.io.IOException;
@@ -15,8 +15,8 @@ public class JsonHomeReader implements HomeReader {
     public SmartHome readHome(String path) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(
-                        HomeComponent.class,
-                        new InterfaceAdapter<HomeComponent>())
+                        Actionable.class,
+                        new InterfaceAdapter<Actionable>())
                 .registerTypeAdapter(
                         SmartDevice.class,
                         new InterfaceAdapter<SmartDevice>())

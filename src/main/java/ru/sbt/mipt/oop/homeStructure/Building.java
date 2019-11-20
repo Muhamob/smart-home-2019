@@ -4,10 +4,10 @@ import ru.sbt.mipt.oop.actions.HomeComponentAction;
 
 import java.util.*;
 
-public class Building implements HomeComponent {
-    private List<HomeComponent> rooms;
+public class Building implements Actionable {
+    private List<Actionable> rooms;
 
-    public Building(List<HomeComponent> rooms) {
+    public Building(List<Actionable> rooms) {
         this.rooms = new ArrayList<>(rooms);
         System.out.println(rooms);
     }
@@ -15,7 +15,7 @@ public class Building implements HomeComponent {
     @Override
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
-        for (HomeComponent premise : rooms) {
+        for (Actionable premise : rooms) {
             executed |= premise.execute(action);
         }
 
@@ -24,8 +24,8 @@ public class Building implements HomeComponent {
 
     @Override
     public boolean contains(String id) {
-        for (HomeComponent homeComponent : rooms) {
-            if(homeComponent.contains(id)) {
+        for (Actionable actionable : rooms) {
+            if(actionable.contains(id)) {
                 return true;
             }
         }

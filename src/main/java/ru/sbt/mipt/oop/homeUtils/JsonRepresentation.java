@@ -4,13 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 import ru.sbt.mipt.oop.homeStructure.Building;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class JsonRepresentation implements StringRepresentation {
     @Override
     public String toString(Building building) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(HomeComponent.class,
-                new InterfaceAdapter<HomeComponent>())
+        Gson gson = new GsonBuilder().registerTypeAdapter(Actionable.class,
+                new InterfaceAdapter<Actionable>())
                 .registerTypeAdapter(SmartDevice.class,
                         new InterfaceAdapter<SmartDevice>())
                 .setPrettyPrinting()

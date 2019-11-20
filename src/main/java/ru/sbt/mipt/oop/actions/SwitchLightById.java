@@ -3,7 +3,7 @@ package ru.sbt.mipt.oop.actions;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Light;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 import static ru.sbt.mipt.oop.SensorEventType.*;
 
@@ -18,12 +18,12 @@ public class SwitchLightById implements HomeComponentAction {
     }
 
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable actionable) {
         if (!(eventType == LIGHT_ON || eventType == LIGHT_OFF)) return false;
 
-        if (!(homeComponent instanceof Light)) return false;
+        if (!(actionable instanceof Light)) return false;
 
-        Light light = (Light) homeComponent;
+        Light light = (Light) actionable;
 
         if (light.getId().equals(lightId)) {
             if (eventType == LIGHT_ON) {
