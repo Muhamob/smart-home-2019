@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.eventHandlers.EventList;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 import ru.sbt.mipt.oop.homeUtils.HomeReader;
 import ru.sbt.mipt.oop.sources.EventManager;
