@@ -2,7 +2,8 @@ package ru.sbt.mipt.oop.homeStructure;
 
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Building implements Actionable {
     private List<Actionable> rooms;

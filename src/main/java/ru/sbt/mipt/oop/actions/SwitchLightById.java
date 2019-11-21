@@ -5,7 +5,8 @@ import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class SwitchLightById implements HomeComponentAction {
 

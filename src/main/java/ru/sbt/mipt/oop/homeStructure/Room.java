@@ -3,7 +3,9 @@ package ru.sbt.mipt.oop.homeStructure;
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Room implements Actionable {
     private Map<String, SmartDevice> smartDevices;

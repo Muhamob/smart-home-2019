@@ -4,7 +4,6 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class EventList {

@@ -3,11 +3,11 @@ package ru.sbt.mipt.oop.homeUtils;
 import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.devices.SmartDevice;
-import ru.sbt.mipt.oop.homeStructure.*;
+import ru.sbt.mipt.oop.homeStructure.Room;
+import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class HomeBuilder {
