@@ -4,7 +4,7 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Alarm;
 import ru.sbt.mipt.oop.devices.AlarmAlert;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class AlarmAction implements HomeComponentAction {
 
@@ -15,7 +15,7 @@ public class AlarmAction implements HomeComponentAction {
     }
 
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable homeComponent) {
         if (!(eventType == SensorEventType.ALARM_ACTIVATE || eventType == SensorEventType.ALARM_DEACTIVATE)) return false;
         if (!(homeComponent instanceof Alarm)) return false;
 

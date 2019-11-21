@@ -8,7 +8,7 @@ import java.util.List;
 public class Building implements Actionable {
     private List<Actionable> rooms;
 
-    public Building(List<Actionable> rooms) {
+    public Building(List<Room> rooms) {
         this.rooms = new ArrayList<>(rooms);
         System.out.println(rooms);
     }

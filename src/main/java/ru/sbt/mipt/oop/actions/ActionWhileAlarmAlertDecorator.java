@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.actions;
 
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class ActionWhileAlarmAlertDecorator implements HomeComponentAction {
     private HomeComponentAction wrappee;
@@ -10,7 +10,7 @@ public class ActionWhileAlarmAlertDecorator implements HomeComponentAction {
     }
 
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable homeComponent) {
         System.out.println("Sending sms");
         return true;
     }

@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.devices.Alarm;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class ActionWhileAlarmActivatedDecorator implements HomeComponentAction {
     private HomeComponentAction wrappee;
@@ -11,7 +11,7 @@ public class ActionWhileAlarmActivatedDecorator implements HomeComponentAction {
     }
 
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable homeComponent) {
         boolean executed = wrappee.execute(homeComponent);
         if (executed) {
             homeComponent.execute(homeComponent_ -> {

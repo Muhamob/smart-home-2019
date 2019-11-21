@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.homeUtils;
 
+import ru.sbt.mipt.oop.devices.Alarm;
 import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.devices.SmartDevice;
@@ -39,6 +40,7 @@ public class HomeBuilder {
         Room bedroom = new Room("bedroom", bedroomDevices);
 
         List<SmartDevice> hallDevices = Arrays.asList(
+                new Alarm("911"),
                 new Light("10", false),
                 new Light("11", false),
                 new Light("12", false),

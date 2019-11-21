@@ -8,6 +8,7 @@ import ru.sbt.mipt.oop.actions.AlarmAction;
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.devices.Alarm;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
+import ru.sbt.mipt.oop.homeUtils.AlarmUtils;
 
 import java.util.List;
 
@@ -17,9 +18,13 @@ public class EventList {
 
         for (HomeComponentAction action : actions) {
             // Декоратор для событий, если сигнализация забила тревогу
-            if (smartHome.getSmartDevice(smartHome.getAlarmId()) != null) {
-                Alarm alarm = (Alarm) smartHome.getSmartDevice(smartHome.getAlarmId());
-                System.out.println(alarm.getAlarmState());
+
+            // Трюк, чтобы можно было внутри лямбда выражения назначить
+            // переменную из внешней области видимости
+            Alarm alarm = AlarmUtils.getAlarm(smartHome);
+
+            if (alarm != null) {
+
                 if (alarm.isActivated()) {
                     if (action.getClass() != AlarmAction.class) {
                         action = new ActionWhileAlarmActivatedDecorator(action);
@@ -29,6 +34,7 @@ public class EventList {
                 }
 
             }
+            System.out.println("Action is: " + action);
 
             smartHome.execute(action);
         }
