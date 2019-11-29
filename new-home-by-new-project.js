@@ -112,6 +112,13 @@
               "id": "13"
             }
           },
+          "911": {
+            "type": "ru.sbt.mipt.oop.devices.Alarm",
+            "data": {
+              "alarmState": {},
+              "id": "911"
+            }
+          },
           "10": {
             "type": "ru.sbt.mipt.oop.devices.Light",
             "data": {
