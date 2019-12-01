@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.devices.alarm;
 
 public class AlarmAlert implements AlarmState {
-    private Alarm alarm;
+    private transient Alarm alarm;
 
     public AlarmAlert(Alarm alarm) {
         this.alarm = alarm;

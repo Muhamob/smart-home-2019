@@ -113,9 +113,12 @@
             }
           },
           "911": {
-            "type": "ru.sbt.mipt.oop.devices.Alarm",
+            "type": "ru.sbt.mipt.oop.devices.alarm.Alarm",
             "data": {
-              "alarmState": {},
+              "alarmState": {
+                "type": "ru.sbt.mipt.oop.devices.alarm.AlarmDeactivated",
+                "data": {}
+              },
               "id": "911"
             }
           },

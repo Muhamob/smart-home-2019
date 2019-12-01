@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop.devices.alarm;
 
 public class AlarmDeactivated implements AlarmState {
-    private Alarm alarm;
+    private transient Alarm alarm;
 
     public AlarmDeactivated(Alarm alarm) {
         this.alarm = alarm;

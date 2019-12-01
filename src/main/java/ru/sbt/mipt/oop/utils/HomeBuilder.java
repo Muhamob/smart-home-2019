@@ -51,7 +51,7 @@ public class HomeBuilder {
         SmartHome smartHome = new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
 
         String jsonString = representation.toString(smartHome);
-        System.out.println(jsonString);
+        System.out.println("JSON representation " + jsonString);
         homeSaver.write(jsonString);
     }
 

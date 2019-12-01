@@ -3,6 +3,7 @@ package ru.sbt.mipt.oop.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.sbt.mipt.oop.devices.SmartDevice;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
@@ -20,6 +21,9 @@ public class JsonHomeReader implements HomeReader {
                 .registerTypeAdapter(
                         SmartDevice.class,
                         new InterfaceAdapter<SmartDevice>())
+                .registerTypeAdapter(
+                        Alarm.class,
+                        new AlarmDeserializer())
                 .create();
 
         String json = null;
