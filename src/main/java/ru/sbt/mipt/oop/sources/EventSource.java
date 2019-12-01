@@ -10,5 +10,5 @@ import ru.sbt.mipt.oop.SensorEvent;
     3. Какие-то реальные источники событий
  */
 public interface EventSource {
-    public SensorEvent getNextSensorEvent();
+    SensorEvent getNextSensorEvent();
 }

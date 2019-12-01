@@ -7,5 +7,5 @@ import ru.sbt.mipt.oop.homeStructure.Actionable;
  */
 public interface HomeComponentAction {
     // true means that action was executed
-    public boolean execute(Actionable actionable);
+    boolean execute(Actionable actionable);
 }
