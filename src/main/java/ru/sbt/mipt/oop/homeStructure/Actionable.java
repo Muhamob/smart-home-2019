@@ -4,5 +4,4 @@ import ru.sbt.mipt.oop.actions.HomeComponentAction;
 
 public interface Actionable {
     public boolean execute(HomeComponentAction action);
-    public boolean contains(String id);
 }

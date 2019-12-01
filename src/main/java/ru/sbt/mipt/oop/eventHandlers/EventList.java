@@ -1,7 +1,6 @@
 package ru.sbt.mipt.oop.eventHandlers;
 
 import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.actions.ActionWhileAlarmActivatedDecorator;
 import ru.sbt.mipt.oop.actions.ActionWhileAlarmAlertDecorator;
 import ru.sbt.mipt.oop.actions.AlarmAction;

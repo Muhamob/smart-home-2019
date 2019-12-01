@@ -22,14 +22,4 @@ public class Building implements Actionable {
 
         return executed;
     }
-
-    @Override
-    public boolean contains(String id) {
-        for (Actionable actionable : rooms) {
-            if(actionable.contains(id)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
