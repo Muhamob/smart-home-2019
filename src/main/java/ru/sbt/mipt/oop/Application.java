@@ -12,7 +12,7 @@ public class Application {
     private final SmartHome smartHome;
     private final EventManager eventManager;
 
-    public Application(HomeReader homeReader, String homePath, EventManager eventManager) throws IOException {
+    public Application(HomeReader homeReader, String homePath, EventManager eventManager) {
         this.homeReader = homeReader;
         this.eventManager = eventManager;
         this.smartHome = homeReader.readHome(homePath);
