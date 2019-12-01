@@ -4,10 +4,10 @@ import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.eventHandlers.EventList;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
-public class EventSourceManger implements EventManager {
+public class EventListEventManger implements EventManager {
     private final EventSource eventSource;
 
-    public EventSourceManger(EventSource eventSource) {
+    public EventListEventManger(EventSource eventSource) {
         this.eventSource = eventSource;
     }
 
