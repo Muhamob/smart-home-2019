@@ -41,12 +41,4 @@ public class Room implements Actionable {
 
         return executed;
     }
-
-    @Override
-    public boolean contains(String id) {
-        for (SmartDevice device_ : smartDevices.values()) {
-            if (device_.contains(id)) return true;
-        }
-        return false;
-    }
 }
