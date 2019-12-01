@@ -2,8 +2,10 @@ package ru.sbt.mipt.oop.eventHandlers;
 
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.actions.*;
-import ru.sbt.mipt.oop.devices.Alarm;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.SMSSender;
+import ru.sbt.mipt.oop.devices.alarm.AlarmActivated;
+import ru.sbt.mipt.oop.devices.alarm.AlarmAlert;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 import ru.sbt.mipt.oop.utils.HomeUtils;
 
@@ -27,11 +29,11 @@ public class EventCollectionCreator {
 
         for (HomeComponentAction action : getDefaultActionList(event)) {
             if (alarm != null) {
-                if (alarm.isActivated()) {
+                if (alarm.getAlarmState().getClass().equals(AlarmActivated.class)) {
                     if (action.getClass() != AlarmAction.class) {
                         action = new ActionWhileAlarmActivatedDecorator(action, smsSender);
                     }
-                } else if (alarm.isAlerting()) {
+                } else if (alarm.getAlarmState().getClass().equals(AlarmAlert.class)) {
                     action = new ActionWhileAlarmAlertDecorator(action, smsSender);
                 }
             }

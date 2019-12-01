@@ -2,8 +2,8 @@ package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
-import ru.sbt.mipt.oop.devices.Alarm;
-import ru.sbt.mipt.oop.devices.AlarmAlert;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
+import ru.sbt.mipt.oop.devices.alarm.AlarmAlert;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class AlarmAction implements HomeComponentAction {
@@ -22,6 +22,8 @@ public class AlarmAction implements HomeComponentAction {
         Alarm alarm = (Alarm) homeComponent;
         if (eventType == SensorEventType.ALARM_ACTIVATE) {
             alarm.activate(eventType.getCode());
+
+            // Used only for debug
             if (alarm.getAlarmState().getClass() == AlarmAlert.class) {
                 System.out.println("Wrong password, alarm is alerting");
             } else {
@@ -29,6 +31,7 @@ public class AlarmAction implements HomeComponentAction {
             }
         } else {
             alarm.deactivate(eventType.getCode());
+            // Used only for debug
             if (alarm.getAlarmState().getClass() == AlarmAlert.class) {
                 System.out.println("Wrong password, alarm is alerting");
             } else {

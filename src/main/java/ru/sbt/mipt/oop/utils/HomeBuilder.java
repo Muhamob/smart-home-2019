@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.utils;
 
-import ru.sbt.mipt.oop.devices.Alarm;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.devices.SmartDevice;

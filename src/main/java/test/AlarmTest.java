@@ -1,10 +1,10 @@
 package test;
 
 import org.junit.jupiter.api.Test;
-import ru.sbt.mipt.oop.devices.Alarm;
-import ru.sbt.mipt.oop.devices.AlarmActivated;
-import ru.sbt.mipt.oop.devices.AlarmAlert;
-import ru.sbt.mipt.oop.devices.AlarmDeactivated;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
+import ru.sbt.mipt.oop.devices.alarm.AlarmActivated;
+import ru.sbt.mipt.oop.devices.alarm.AlarmAlert;
+import ru.sbt.mipt.oop.devices.alarm.AlarmDeactivated;
 
 import static org.junit.jupiter.api.Assertions.*;
 

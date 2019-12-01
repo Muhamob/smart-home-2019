@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.actions;
 
-import ru.sbt.mipt.oop.devices.Alarm;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.SMSSender;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
 
