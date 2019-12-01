@@ -6,7 +6,7 @@ import ru.sbt.mipt.oop.sources.EventManager;
 import ru.sbt.mipt.oop.sources.EventSource;
 import ru.sbt.mipt.oop.sources.EventSourceManger;
 import ru.sbt.mipt.oop.sources.TestSourceHallDoorClosing;
-ы
+
 public class Main {
     public static void main(String[] args) {
         HomeReader homeReader = new JsonHomeReader();
