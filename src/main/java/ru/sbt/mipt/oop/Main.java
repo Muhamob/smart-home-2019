@@ -1,7 +1,7 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.homeUtils.HomeReader;
-import ru.sbt.mipt.oop.homeUtils.JsonHomeReader;
+import ru.sbt.mipt.oop.utils.HomeReader;
+import ru.sbt.mipt.oop.utils.JsonHomeReader;
 import ru.sbt.mipt.oop.sources.EventManager;
 import ru.sbt.mipt.oop.sources.EventSource;
 import ru.sbt.mipt.oop.sources.EventListEventManger;

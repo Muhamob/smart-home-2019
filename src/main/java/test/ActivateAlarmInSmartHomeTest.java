@@ -8,19 +8,20 @@ import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.*;
 import ru.sbt.mipt.oop.eventHandlers.EventList;
 import ru.sbt.mipt.oop.homeStructure.*;
-import ru.sbt.mipt.oop.homeUtils.AlarmUtils;
+import ru.sbt.mipt.oop.utils.HomeUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class ActivateAlarmInSmartHomeTest {
-    SmartHome createSmartHomeWithAlarm() {
+    SmartHome createSmartHomeWithAlarmAndSMSSender() {
 
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
                 new Door("2", false),
-                new Alarm("10")
+                new Alarm("10"),
+                new SMSSender("123", "911")
         );
         Room kitchen = new Room("kitchen", kitchenDevices);
 
@@ -29,47 +30,47 @@ public class ActivateAlarmInSmartHomeTest {
 
     @Test
     void checkAlarmActivates() {
-        SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = AlarmUtils.getAlarm(home);
+        SmartHome home = createSmartHomeWithAlarmAndSMSSender();
+        Alarm alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
 
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
 
         SensorEvent event = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, event);
-        alarm = AlarmUtils.getAlarm(home);
+        alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         assertEquals(alarm.getAlarmState().getClass(), AlarmActivated.class);
     }
 
     @Test
     void checkAlarmDeactivatesWithCorrectPassword() {
-        SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = AlarmUtils.getAlarm(home);
+        SmartHome home = createSmartHomeWithAlarmAndSMSSender();
+        Alarm alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
 
         SensorEvent eventActivateAlarm = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, eventActivateAlarm);
-        alarm = AlarmUtils.getAlarm(home);
+        alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         assertEquals(alarm.getAlarmState().getClass(), AlarmActivated.class);
 
         SensorEvent eventDeactivateAlarm = new SensorEvent(SensorEventType.ALARM_DEACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, eventDeactivateAlarm);
-        alarm = AlarmUtils.getAlarm(home);
+        alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
     }
 
     @Test
     void checkAlarmAlertWithWrongPassword() {
-        SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = AlarmUtils.getAlarm(home);
+        SmartHome home = createSmartHomeWithAlarmAndSMSSender();
+        Alarm alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         assertEquals(alarm.getAlarmState().getClass(), AlarmDeactivated.class);
 
         SensorEvent eventActivateAlarm = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
 
         EventList.run(home, eventActivateAlarm);
-        alarm = AlarmUtils.getAlarm(home);
+        alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         System.out.println("checkAlarmAlertWithWrongPassword: " + alarm.getAlarmState());
         assertEquals(alarm.getAlarmState().getClass(), AlarmActivated.class);
 
@@ -77,20 +78,22 @@ public class ActivateAlarmInSmartHomeTest {
         SensorEvent eventDeactivateAlarm = new SensorEvent(SensorEventType.ALARM_DEACTIVATE.setCode("1001"), "10");
 
         EventList.run(home, eventDeactivateAlarm);
-        alarm = AlarmUtils.getAlarm(home);
+        alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
         assertEquals(alarm.getAlarmState().getClass(), AlarmAlert.class);
     }
 
     @Test
     void sendingSMSWhileActionWithActivatedAlarm() {
-        SmartHome home = createSmartHomeWithAlarm();
-        Alarm alarm = AlarmUtils.getAlarm(home);
+        SmartHome home = createSmartHomeWithAlarmAndSMSSender();
 
         SensorEvent eventActivateAlarm = new SensorEvent(SensorEventType.ALARM_ACTIVATE.setCode("1000"), "10");
         EventList.run(home, eventActivateAlarm);
 
         SensorEvent turnOnLight = new SensorEvent(SensorEventType.LIGHT_ON, "1");
         EventList.run(home, turnOnLight);
+
+        SensorEvent turnOffLight = new SensorEvent(SensorEventType.LIGHT_OFF, "1");
+        EventList.run(home, turnOffLight);
     }
 
 }

@@ -1,13 +1,16 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.devices.Alarm;
+import ru.sbt.mipt.oop.devices.SMSSender;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class ActionWhileAlarmActivatedDecorator implements HomeComponentAction {
-    private HomeComponentAction wrappee;
+    private final HomeComponentAction wrappee;
+    private final SMSSender smsSender;
 
-    public ActionWhileAlarmActivatedDecorator(HomeComponentAction action) {
-        this.wrappee = action;
+    public ActionWhileAlarmActivatedDecorator(HomeComponentAction wrappee, SMSSender smsSender) {
+        this.wrappee = wrappee;
+        this.smsSender = smsSender;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class ActionWhileAlarmActivatedDecorator implements HomeComponentAction {
                     return false;
                 }
             });
-            System.out.println("Sending sms");
+            smsSender.sendSms("Alarm is alerting, home address is 192.168.0.1");
         }
         return executed;
     }

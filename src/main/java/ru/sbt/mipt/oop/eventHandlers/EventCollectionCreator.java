@@ -3,8 +3,9 @@ package ru.sbt.mipt.oop.eventHandlers;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.actions.*;
 import ru.sbt.mipt.oop.devices.Alarm;
+import ru.sbt.mipt.oop.devices.SMSSender;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
-import ru.sbt.mipt.oop.homeUtils.AlarmUtils;
+import ru.sbt.mipt.oop.utils.HomeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,10 +14,12 @@ import java.util.List;
 public class EventCollectionCreator {
     private final Alarm alarm;
     private final SmartHome home;
+    private final SMSSender smsSender;
 
     public EventCollectionCreator(SmartHome home) {
         this.home = home;
-        this.alarm = AlarmUtils.getAlarm(home);
+        this.alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
+        this.smsSender = (SMSSender) HomeUtils.getSmartDevice(home, SMSSender.class);
     }
 
     public List<HomeComponentAction> getActionList(SensorEvent event) {
@@ -26,10 +29,10 @@ public class EventCollectionCreator {
             if (alarm != null) {
                 if (alarm.isActivated()) {
                     if (action.getClass() != AlarmAction.class) {
-                        action = new ActionWhileAlarmActivatedDecorator(action);
+                        action = new ActionWhileAlarmActivatedDecorator(action, smsSender);
                     }
                 } else if (alarm.isAlerting()) {
-                    action = new ActionWhileAlarmAlertDecorator(action);
+                    action = new ActionWhileAlarmAlertDecorator(action, smsSender);
                 }
             }
 

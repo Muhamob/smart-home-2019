@@ -1,10 +1,8 @@
 package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
-import ru.sbt.mipt.oop.homeUtils.HomeReader;
+import ru.sbt.mipt.oop.utils.HomeReader;
 import ru.sbt.mipt.oop.sources.EventManager;
-
-import java.io.IOException;
 
 public class Application {
 
