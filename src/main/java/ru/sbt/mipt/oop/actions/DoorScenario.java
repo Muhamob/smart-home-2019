@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEvent;
+import ru.sbt.mipt.oop.SensorEventInterface;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
 import ru.sbt.mipt.oop.homeStructure.Room;
@@ -11,9 +12,9 @@ import static ru.sbt.mipt.oop.SensorEventType.*;
 public class DoorScenario implements HomeComponentAction {
     private final SensorEventType eventType;
     private final String eventId;
-    private final SensorEvent event;
+    private final SensorEventInterface event;
 
-    public DoorScenario(SensorEvent event) {
+    public DoorScenario(SensorEventInterface event) {
         this.eventType = event.getType();
         this.eventId = event.getObjectId();
         this.event = event;

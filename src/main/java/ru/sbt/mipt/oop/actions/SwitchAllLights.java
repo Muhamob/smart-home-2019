@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEvent;
+import ru.sbt.mipt.oop.SensorEventInterface;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
@@ -12,7 +13,7 @@ public class SwitchAllLights implements HomeComponentAction {
 
     private final SensorEventType eventType;
 
-    public SwitchAllLights(SensorEvent event) {
+    public SwitchAllLights(SensorEventInterface event) {
         this.eventType = event.getType();
     }
 
