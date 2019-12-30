@@ -5,6 +5,7 @@ import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.alarm.AlarmAlert;
 import ru.sbt.mipt.oop.homeStructure.Actionable;
+import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 public class AlarmAction implements HomeComponentAction {
 
@@ -17,9 +18,10 @@ public class AlarmAction implements HomeComponentAction {
     @Override
     public boolean execute(Actionable homeComponent) {
         if (!(eventType == SensorEventType.ALARM_ACTIVATE || eventType == SensorEventType.ALARM_DEACTIVATE)) return false;
-        if (!(homeComponent instanceof Alarm)) return false;
+        if (!(homeComponent instanceof SmartHome)) return false;
 
-        Alarm alarm = (Alarm) homeComponent;
+        SmartHome home = (SmartHome) homeComponent;
+        Alarm alarm = home.getAlarm(); //(Alarm) homeComponent;
         if (eventType == SensorEventType.ALARM_ACTIVATE) {
             alarm.activate(eventType.getCode());
 

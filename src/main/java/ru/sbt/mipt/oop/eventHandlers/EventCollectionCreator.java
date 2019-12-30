@@ -20,7 +20,7 @@ public class EventCollectionCreator {
 
     public EventCollectionCreator(SmartHome home) {
         this.home = home;
-        this.alarm = (Alarm) HomeUtils.getSmartDevice(home, Alarm.class);
+        this.alarm = home.getAlarm(); //home.getAlarm();
         this.smsSender = (SMSSender) HomeUtils.getSmartDevice(home, SMSSender.class);
     }
 
