@@ -28,16 +28,16 @@ public class EventCollectionCreator {
         List<HomeComponentAction> actions = new ArrayList<>();
 
         for (HomeComponentAction action : getDefaultActionList(event)) {
-            if (alarm != null) {
-                if (alarm.getAlarmState().getClass().equals(AlarmActivated.class)) {
-                    if (action.getClass() != AlarmAction.class) {
-                        action = new ActionWhileAlarmActivatedDecorator(action, smsSender);
-                    }
-                } else if (alarm.getAlarmState().getClass().equals(AlarmAlert.class)) {
-                    action = new ActionWhileAlarmAlertDecorator(action, smsSender);
-                }
-            }
-
+//            if (alarm != null) {
+//                if (alarm.getAlarmState().getClass().equals(AlarmActivated.class)) {
+//                    if (action.getClass() != AlarmAction.class) {
+//                        action = new ActionWhileAlarmActivatedDecorator(action, smsSender);
+//                    }
+//                } else if (alarm.getAlarmState().getClass().equals(AlarmAlert.class)) {
+//                    action = new ActionWhileAlarmAlertDecorator(action, smsSender);
+//                }
+//            }
+            action = new AlarmDecorator(action, smsSender, alarm);
             actions.add(action);
         }
 
