@@ -1,5 +1,7 @@
 package ru.sbt.mipt.oop.actions;
 
+import ru.sbt.mipt.oop.SensorEvent;
+import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.SMSSender;
 import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.alarm.AlarmActivated;
@@ -10,11 +12,13 @@ public class AlarmDecorator implements HomeComponentAction {
     private final HomeComponentAction wrappee;
     private final SMSSender smsSender;
     private final Alarm alarm;
+    private final SensorEvent event;
 
-    public AlarmDecorator(HomeComponentAction wrappee, SMSSender smsSender, Alarm alarm) {
+    public AlarmDecorator(HomeComponentAction wrappee, SMSSender smsSender, Alarm alarm, SensorEvent event) {
         this.wrappee = wrappee;
         this.smsSender = smsSender;
         this.alarm = alarm;
+        this.event = event;
     }
 
     private boolean executeWhileActivated(Actionable homeComponent) {
@@ -33,7 +37,7 @@ public class AlarmDecorator implements HomeComponentAction {
         return executed;
     }
 
-    private boolean executeWhileAlaramAlert(Actionable homeComponent) {
+    private boolean executeWhileAlarmAlert(Actionable homeComponent) {
         smsSender.sendSms("Alarm is alerting, home address is 192.168.0.1");
         return true;
     }
@@ -44,11 +48,12 @@ public class AlarmDecorator implements HomeComponentAction {
 
         if (alarm != null) {
             if (alarm.getAlarmState().getClass().equals(AlarmActivated.class)) {
-                if (wrappee.getClass() != AlarmAction.class) {
+//                if (wrappee.getClass() != AlarmAction.class) {
+                if (event.getType() != SensorEventType.ALARM_DEACTIVATE) {
                     result = executeWhileActivated(actionable);
                 }
             } else if (alarm.getAlarmState().getClass().equals(AlarmAlert.class)) {
-                result = executeWhileAlaramAlert(actionable);
+                result = executeWhileAlarmAlert(actionable);
             } else {
                 result = wrappee.execute(actionable);
             }

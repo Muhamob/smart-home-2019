@@ -28,7 +28,7 @@ public class EventCollectionCreator {
         List<HomeComponentAction> actions = new ArrayList<>();
 
         for (HomeComponentAction action : getDefaultActionList(event)) {
-            action = new AlarmDecorator(action, smsSender, alarm);
+            action = new AlarmDecorator(action, smsSender, alarm, event);
             actions.add(action);
         }
 
