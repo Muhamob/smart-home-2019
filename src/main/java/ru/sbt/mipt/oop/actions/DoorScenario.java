@@ -10,11 +10,17 @@ import ru.sbt.mipt.oop.homeStructure.SmartHome;
 import static ru.sbt.mipt.oop.SensorEventType.*;
 
 public class DoorScenario implements HomeComponentAction {
-    private final SensorEventType eventType;
-    private final String eventId;
-    private final SensorEventInterface event;
+    private SensorEventType eventType;
+    private String eventId;
+    private SensorEventInterface event;
 
-    public DoorScenario(SensorEventInterface event) {
+    public DoorScenario(SensorEvent event) {
+        setEvent(event);
+    }
+
+    public DoorScenario() {}
+
+    public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
         this.eventId = event.getObjectId();
         this.event = event;

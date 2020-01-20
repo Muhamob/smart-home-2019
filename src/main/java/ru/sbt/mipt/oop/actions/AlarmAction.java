@@ -1,7 +1,6 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEvent;
-import ru.sbt.mipt.oop.SensorEventInterface;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.alarm.AlarmAlert;
@@ -9,9 +8,15 @@ import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 public class AlarmAction implements HomeComponentAction {
 
-    private final SensorEventType eventType;
+    private SensorEventType eventType;
 
-    public AlarmAction(SensorEventInterface event) {
+    public AlarmAction(SensorEvent event) {
+        this.eventType = event.getType();
+    }
+
+    public AlarmAction() {}
+
+    public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
     }
 

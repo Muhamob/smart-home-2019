@@ -50,7 +50,7 @@ public class EventCollectionCreator {
         return action;
     }
 
-    private List<HomeComponentAction> getDefaultActionList(SensorEventInterface event) {
+    private List<HomeComponentAction> getDefaultActionList(SensorEvent event) {
         return Arrays.asList(
                 new DoorScenario(event),
                 new SwitchLightById(event),

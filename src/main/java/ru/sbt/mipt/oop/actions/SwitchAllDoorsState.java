@@ -12,9 +12,15 @@ import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
 public class SwitchAllDoorsState implements HomeComponentAction {
 
-    private final SensorEventType eventType;
+    private SensorEventType eventType;
 
-    public SwitchAllDoorsState(SensorEventInterface event) {
+    public SwitchAllDoorsState(SensorEvent event) {
+        setEvent(event);
+    }
+
+    public SwitchAllDoorsState() {}
+
+    public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
     }
 
