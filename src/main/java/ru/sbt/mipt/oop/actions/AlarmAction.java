@@ -14,8 +14,6 @@ public class AlarmAction implements HomeComponentAction {
         this.eventType = event.getType();
     }
 
-    public AlarmAction() {}
-
     public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
     }
