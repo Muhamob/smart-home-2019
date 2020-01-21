@@ -1,9 +1,10 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEvent;
+import ru.sbt.mipt.oop.SensorEventInterface;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Door;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
@@ -11,19 +12,25 @@ import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
 public class SwitchAllDoorsState implements HomeComponentAction {
 
-    private final SensorEventType eventType;
+    private SensorEventType eventType;
 
     public SwitchAllDoorsState(SensorEvent event) {
+        setEvent(event);
+    }
+
+    public SwitchAllDoorsState() {}
+
+    public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
     }
 
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable actionable) {
         if (eventType != DOOR_OPEN && eventType != DOOR_CLOSED) return false;
 
-        if (!(homeComponent instanceof Door)) return false;
+        if (!(actionable instanceof Door)) return false;
 
-        Door door = (Door) homeComponent;
+        Door door = (Door) actionable;
 
         if (eventType == DOOR_OPEN) {
             door.setOpen(true);

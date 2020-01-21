@@ -1,26 +1,15 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.homeUtils.HomeReader;
-import ru.sbt.mipt.oop.homeUtils.JsonHomeReader;
-import ru.sbt.mipt.oop.sources.EventManager;
-import ru.sbt.mipt.oop.sources.EventSource;
-import ru.sbt.mipt.oop.sources.EventSourceManger;
-import ru.sbt.mipt.oop.sources.TestSourceHallDoorClosing;
-
-import java.io.IOException;
+import com.coolcompany.smarthome.events.SensorEventsManager;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.sbt.mipt.oop.configs.NewAPIConfig;
+import ru.sbt.mipt.oop.configs.TestConfig;
 
 public class Main {
     public static void main(String[] args) {
-        HomeReader homeReader = new JsonHomeReader();
-        EventSource eventSource = new TestSourceHallDoorClosing();
-        EventManager manger = new EventSourceManger(eventSource);
-
-        try {
-            Application app = new Application(
-                    homeReader, "new-home-by-new-project.js", manger);
-            app.run();
-        } catch (IOException e) {
-            System.out.println("Something wrong with reading file");
-        }
+        ApplicationContext context = new AnnotationConfigApplicationContext(NewAPIConfig.class);
+        SensorEventsManager eventsManager = context.getBean(SensorEventsManager.class);
+        eventsManager.start();
     }
 }

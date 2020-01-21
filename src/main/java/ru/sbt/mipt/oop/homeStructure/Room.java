@@ -3,9 +3,11 @@ package ru.sbt.mipt.oop.homeStructure;
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.devices.SmartDevice;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Room implements HomeComponent {
+public class Room implements Actionable {
     private Map<String, SmartDevice> smartDevices;
     private String name;
 
@@ -22,22 +24,12 @@ public class Room implements HomeComponent {
         this.name = name;
     }
 
-    @Override
-    public SmartDevice getSmartDevice(String id) {
-        return smartDevices.get(id);
-    }
-
     public void addDevice(SmartDevice device) {
         this.smartDevices.put(device.getId(), device);
     }
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        return new ArrayList<>(this.smartDevices.values());
     }
 
     @Override
@@ -48,13 +40,5 @@ public class Room implements HomeComponent {
         }
 
         return executed;
-    }
-
-    @Override
-    public boolean contains(String id) {
-        for (SmartDevice device_ : smartDevices.values()) {
-            if (device_.contains(id)) return true;
-        }
-        return false;
     }
 }

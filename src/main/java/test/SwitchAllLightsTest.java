@@ -14,15 +14,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SwitchAllLightsTest {
     @Test
     public void turnOnAllLight() {
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
 
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
@@ -42,16 +38,22 @@ public class SwitchAllLightsTest {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(Arrays.asList(kitchen, hall));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Arrays.asList(kitchen, hall));
 
         home.execute(new SwitchAllLights(new SensorEvent(SensorEventType.LIGHT_ON, null)));
 
-        for (SmartDevice device : home.getAllSmartDevices()) {
-            Light light = (Light) device;
-            assertTrue(light.isOn());
+        for (int i=1; i<11; i++) {
+            String id = Integer.toString(i);
+            home.execute(x->{
+                if (x instanceof Light) {
+                    Light light = (Light) x;
+                    if (light.getId().equals(id)) {
+                        assertTrue(light.isOn());
+                        return true;
+                    }
+                }
+                return false;
+            });
         }
     }
 }

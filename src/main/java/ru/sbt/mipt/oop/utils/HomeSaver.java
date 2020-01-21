@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.homeUtils;
+package ru.sbt.mipt.oop.utils;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

@@ -12,7 +12,6 @@ import ru.sbt.mipt.oop.homeStructure.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,12 +19,6 @@ class SwitchDoorStateByIdTest {
 
     @Test
     void testCloseSomeDoor() {
-
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
-
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Door("1", true),
                 new Door("2", false),
@@ -35,43 +28,59 @@ class SwitchDoorStateByIdTest {
         );
         Room kitchen = new Room("kitchen", kitchenDevices);
 
-        floor.setRooms(Collections.singletonList(kitchen));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Collections.singletonList(kitchen));
 
         boolean[] doorStates = new boolean[4];
         Door door_;
         for (int i = 0; i < doorStates.length; i++) {
-            door_ = (Door) home.getSmartDevice(Integer.toString(i+1+1));
-            doorStates[i] = door_.isOpen();
+            String id = Integer.toString(i+1+1);
+            home.execute(x -> {
+                if (!(x instanceof Door)) return false;
+
+                Door door = (Door) x;
+                if (door.getId().equals(id)) {
+                    assertFalse(door.isOpen());
+                    return true;
+                }
+
+                return false;
+            });
         }
 
-        Door door = (Door) home.getSmartDevice("1");
-        boolean doorStateBefore = door.isOpen();
-
-        // close door
+        // close door with id 1
         SensorEvent event = new SensorEvent(SensorEventType.DOOR_CLOSED, "1");
         EventList.run(home, event);
-        boolean doorStateAfter = door.isOpen();
 
-        assertTrue(doorStateBefore);
-        assertFalse(doorStateAfter);
+        home.execute(x -> {
+            if (!(x instanceof Door)) return false;
+
+            Door door = (Door) x;
+            if (door.getId().equals("1")) {
+                assertFalse(door.isOpen());
+                return true;
+            }
+
+            return false;
+        });
 
         for (int i = 0; i < doorStates.length; i++) {
-            boolean doorState = doorStates[i];
-            door_ = (Door) home.getSmartDevice(Integer.toString(i+1+1));
-            assertEquals(doorState, door_.isOpen());
+            String id = Integer.toString(i+1+1);
+            home.execute(x -> {
+                if (!(x instanceof Door)) return false;
+
+                Door door = (Door) x;
+                if (door.getId().equals(id)) {
+                    assertFalse(door.isOpen());
+                    return true;
+                }
+
+                return false;
+            });
         }
     }
 
     @Test
     void testCloseHallDoor() {
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
-
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", true),
                 new Light("2", false),
@@ -89,20 +98,17 @@ class SwitchDoorStateByIdTest {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(Arrays.asList(kitchen, hall));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome home = new SmartHome(premises);
+        SmartHome home = new SmartHome(Arrays.asList(kitchen, hall));
 
         SensorEvent event = new SensorEvent(SensorEventType.DOOR_CLOSED, "9");
         EventList.run(home, event);
 
-        for (SmartDevice device : home.getAllSmartDevices()) {
-            if (device instanceof Light) {
-                System.out.println("light id " + device.getId());
-                System.out.println(((Light) device).isOn());
-                assertFalse(((Light) device).isOn());
+        home.execute(x -> {
+            if (x instanceof Light) {
+                assertFalse(((Light) x).isOn());
+                return true;
             }
-        }
+            return false;
+        });
     }
 }

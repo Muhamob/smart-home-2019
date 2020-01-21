@@ -2,57 +2,32 @@ package ru.sbt.mipt.oop.homeStructure;
 
 import ru.sbt.mipt.oop.actions.HomeComponentAction;
 import ru.sbt.mipt.oop.devices.SmartDevice;
-import ru.sbt.mipt.oop.homeUtils.HomeCheckers;
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Building implements HomeComponent {
-    private List<HomeComponent> premises;
+public class Building implements Actionable {
+    private List<Actionable> rooms;
 
-    public Building(List<HomeComponent> premises) {
-        this.premises = new ArrayList<>(premises);
-        System.out.println(premises);
+    private Alarm alarm = new Alarm("alarm_id");
+
+    public Building(List<Room> rooms) {
+        this.rooms = new ArrayList<>(rooms);
+        System.out.println(rooms);
     }
 
-    @Override
-    public SmartDevice getSmartDevice(String id) {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-
-        for (HomeComponent premise : premises) {
-            smartDevices.add(premise.getSmartDevice(id));
-        }
-
-        return HomeCheckers.getFirstNotNull(smartDevices);
-    }
-
-    @Override
-    public List<SmartDevice> getAllSmartDevices() {
-        List<SmartDevice> smartDevices = new ArrayList<>();
-
-        for (HomeComponent premise : premises) {
-            smartDevices.addAll(premise.getAllSmartDevices());
-        }
-
-        return smartDevices;
+    public Alarm getAlarm() {
+        return alarm;
     }
 
     @Override
     public boolean execute(HomeComponentAction action) {
         boolean executed = action.execute(this);
-        for (HomeComponent premise : premises) {
+        for (Actionable premise : rooms) {
             executed |= premise.execute(action);
         }
 
         return executed;
-    }
-
-    @Override
-    public boolean contains(String id) {
-        for (HomeComponent homeComponent : premises) {
-            if(homeComponent.contains(id)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

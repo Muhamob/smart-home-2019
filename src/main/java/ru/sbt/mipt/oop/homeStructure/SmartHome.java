@@ -3,18 +3,7 @@ package ru.sbt.mipt.oop.homeStructure;
 import java.util.List;
 
 public class SmartHome extends Building {
-    private String alarmId = null;
-
-    public SmartHome(List<HomeComponent> premises) {
-        super(premises);
-    }
-
-    public SmartHome(List<HomeComponent> premises, String alarmId) {
-        super(premises);
-        this.alarmId = alarmId;
-    }
-
-    public String getAlarmId() {
-        return alarmId;
+    public SmartHome(List<Room> rooms) {
+        super(rooms);
     }
 }

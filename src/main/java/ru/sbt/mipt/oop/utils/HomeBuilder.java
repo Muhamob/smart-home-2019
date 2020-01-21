@@ -1,13 +1,14 @@
-package ru.sbt.mipt.oop.homeUtils;
+package ru.sbt.mipt.oop.utils;
 
+import ru.sbt.mipt.oop.devices.alarm.Alarm;
 import ru.sbt.mipt.oop.devices.Door;
 import ru.sbt.mipt.oop.devices.Light;
 import ru.sbt.mipt.oop.devices.SmartDevice;
-import ru.sbt.mipt.oop.homeStructure.*;
+import ru.sbt.mipt.oop.homeStructure.Room;
+import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class HomeBuilder {
@@ -16,11 +17,6 @@ public class HomeBuilder {
 
         StringRepresentation representation = new JsonRepresentation();
         HomeSaver homeSaver = new HomeSaver("new-home-by-new-project.js");
-
-        Interior interior = new Interior();
-        List<HomeComponent> premises = Collections.singletonList(interior);
-
-        Floor floor = new Floor(0);
 
         List<SmartDevice> kitchenDevices = Arrays.asList(
                 new Light("1", false),
@@ -44,6 +40,7 @@ public class HomeBuilder {
         Room bedroom = new Room("bedroom", bedroomDevices);
 
         List<SmartDevice> hallDevices = Arrays.asList(
+                new Alarm("911"),
                 new Light("10", false),
                 new Light("11", false),
                 new Light("12", false),
@@ -51,13 +48,10 @@ public class HomeBuilder {
         );
         Room hall = new Room("hall", hallDevices);
 
-        floor.setRooms(Arrays.asList(kitchen, bathroom, bedroom, hall));
-        interior.setFloors(Collections.singletonList(floor));
-
-        SmartHome smartHome = new SmartHome(premises);
+        SmartHome smartHome = new SmartHome(Arrays.asList(kitchen, bathroom, bedroom, hall));
 
         String jsonString = representation.toString(smartHome);
-        System.out.println(jsonString);
+        System.out.println("JSON representation " + jsonString);
         homeSaver.write(jsonString);
     }
 

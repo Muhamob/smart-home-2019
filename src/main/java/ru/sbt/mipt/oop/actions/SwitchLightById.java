@@ -3,27 +3,33 @@ package ru.sbt.mipt.oop.actions;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.SensorEventType;
 import ru.sbt.mipt.oop.devices.Light;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
 public class SwitchLightById implements HomeComponentAction {
-
-    private final String lightId;
-    private final SensorEventType eventType;
+    private String lightId;
+    private SensorEventType eventType;
 
     public SwitchLightById(SensorEvent event) {
         this.lightId = event.getObjectId();
         this.eventType = event.getType();
     }
 
+    public SwitchLightById() {}
+
+    public void setEvent(SensorEvent event) {
+        this.eventType = event.getType();
+    }
+
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable actionable) {
         if (!(eventType == LIGHT_ON || eventType == LIGHT_OFF)) return false;
 
-        if (!(homeComponent instanceof Light)) return false;
+        if (!(actionable instanceof Light)) return false;
 
-        Light light = (Light) homeComponent;
+        Light light = (Light) actionable;
 
         if (light.getId().equals(lightId)) {
             if (eventType == LIGHT_ON) {

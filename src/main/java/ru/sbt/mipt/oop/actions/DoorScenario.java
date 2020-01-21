@@ -1,31 +1,38 @@
 package ru.sbt.mipt.oop.actions;
 
 import ru.sbt.mipt.oop.SensorEvent;
+import ru.sbt.mipt.oop.SensorEventInterface;
 import ru.sbt.mipt.oop.SensorEventType;
-import ru.sbt.mipt.oop.homeStructure.HomeComponent;
+import ru.sbt.mipt.oop.homeStructure.Actionable;
 import ru.sbt.mipt.oop.homeStructure.Room;
 import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 import static ru.sbt.mipt.oop.SensorEventType.*;
 
 public class DoorScenario implements HomeComponentAction {
-    private final SensorEventType eventType;
-    private final String eventId;
-    private final SensorEvent event;
+    private SensorEventType eventType;
+    private String eventId;
+    private SensorEventInterface event;
 
     public DoorScenario(SensorEvent event) {
+        setEvent(event);
+    }
+
+    public DoorScenario() {}
+
+    public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
         this.eventId = event.getObjectId();
         this.event = event;
     }
 
     @Override
-    public boolean execute(HomeComponent homeComponent) {
+    public boolean execute(Actionable actionable) {
         if (!(eventType == DOOR_OPEN || eventType == DOOR_CLOSED)) return false;
 
-        if (!(homeComponent instanceof SmartHome)) return false;
+        if (!(actionable instanceof SmartHome)) return false;
 
-        SmartHome home = (SmartHome) homeComponent;
+        SmartHome home = (SmartHome) actionable;
 
         boolean executed = home.execute(homeComponent1 -> {
             if (!(homeComponent1 instanceof Room)) return false;
