@@ -9,11 +9,6 @@ public class AlarmActivated implements AlarmState {
 
     @Override
     public void activate(String code) {
-        // Логично, что если кто-то попытается ещё раз активировать сигнализацию
-        // с неправильным паролем, то здесь что-то не так, поэтому активируем сигнализацию
-        if (!alarm.checkCode(code)) {
-            activateAlert();
-        }
     }
 
     @Override
