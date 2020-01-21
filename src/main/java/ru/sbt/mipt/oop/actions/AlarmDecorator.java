@@ -22,18 +22,15 @@ public class AlarmDecorator implements HomeComponentAction {
     }
 
     private boolean executeWhileActivated(Actionable homeComponent) {
-        boolean executed = wrappee.execute(homeComponent);
-        if (executed) {
-            homeComponent.execute(homeComponent_ -> {
-                if (homeComponent_ instanceof Alarm) {
-                    ((Alarm) homeComponent_).invokeAlarm();
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            smsSender.sendSms("Alarm is alerting, home address is 192.168.0.1");
-        }
+        boolean executed = homeComponent.execute(homeComponent_ -> {
+            if (homeComponent_ instanceof Alarm) {
+                ((Alarm) homeComponent_).invokeAlarm();
+                return true;
+            } else {
+                return false;
+            }
+        });
+        smsSender.sendSms("Alarm is alerting, home address is 192.168.0.1");
         return executed;
     }
 
@@ -48,12 +45,15 @@ public class AlarmDecorator implements HomeComponentAction {
 
         if (alarm != null) {
             if (alarm.getAlarmState().getClass().equals(AlarmActivated.class)) {
-//                if (wrappee.getClass() != AlarmAction.class) {
                 if (event.getType() != SensorEventType.ALARM_DEACTIVATE) {
                     result = executeWhileActivated(actionable);
                 }
             } else if (alarm.getAlarmState().getClass().equals(AlarmAlert.class)) {
-                result = executeWhileAlarmAlert(actionable);
+                if (event.getType() != SensorEventType.ALARM_DEACTIVATE) {
+                    result = executeWhileAlarmAlert(actionable);
+                } else {
+                    result = wrappee.execute(actionable);
+                }
             } else {
                 result = wrappee.execute(actionable);
             }
