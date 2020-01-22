@@ -14,9 +14,18 @@ public class NewAPIConfig {
     @Bean
     SensorEventsManager sensorEventsManager(){
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
-        sensorEventsManager.registerEventHandler(getLightEventHandlerAdapter());
-        sensorEventsManager.registerEventHandler(getDoorEventHandlerAdapter());
+        sensorEventsManager.registerEventHandler(
+                getEventHandlerAdapter(getSmartHome(), getSensorEventAdapter())
+        );
         return sensorEventsManager;
+    }
+
+    private SensorEventAdapter getSensorEventAdapter() {
+        return new EventAdapter();
+    }
+
+    private EventHandler getEventHandlerAdapter(SmartHome smartHome, SensorEventAdapter sensorEventAdapter) {
+        return new EventHandlerAdapter(smartHome, sensorEventAdapter);
     }
 
     @Bean
@@ -27,25 +36,5 @@ public class NewAPIConfig {
     @Bean
     public HomeReader getJsonHomeReader() {
         return new JsonHomeReader();
-    }
-
-    @Bean
-    public EventHandler getLightEventHandlerAdapter() {
-        return new LightEventHandlerAdapter(getSmartHome(), getLightEventAdapter());
-    }
-
-    @Bean
-    public SensorEventAdapter getLightEventAdapter() {
-        return new LightEventAdapter();
-    }
-
-    @Bean
-    public EventHandler getDoorEventHandlerAdapter() {
-        return new DoorEventHandlerAdapter(getSmartHome(), getDoorEventAdapter());
-    }
-
-    @Bean
-    public SensorEventAdapter getDoorEventAdapter() {
-        return new DoorEventAdapter();
     }
 }
