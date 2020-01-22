@@ -18,8 +18,6 @@ public class DoorScenario implements HomeComponentAction {
         setEvent(event);
     }
 
-    public DoorScenario() {}
-
     public void setEvent(SensorEvent event) {
         this.eventType = event.getType();
         this.eventId = event.getObjectId();
