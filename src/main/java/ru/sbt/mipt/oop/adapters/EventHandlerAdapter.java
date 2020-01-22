@@ -8,9 +8,9 @@ import ru.sbt.mipt.oop.homeStructure.SmartHome;
 
 public class EventHandlerAdapter implements EventHandler {
     private SmartHome smartHome;
-    private SensorEventAdapter sensorEventAdapter;
+    private SensorEventConverter sensorEventAdapter;
 
-    public EventHandlerAdapter(SmartHome smartHome, SensorEventAdapter sensorEventAdapter) {
+    public EventHandlerAdapter(SmartHome smartHome, SensorEventConverter sensorEventAdapter) {
         this.smartHome = smartHome;
         this.sensorEventAdapter = sensorEventAdapter;
     }

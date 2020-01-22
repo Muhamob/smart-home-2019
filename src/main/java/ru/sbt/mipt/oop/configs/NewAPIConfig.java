@@ -9,23 +9,40 @@ import ru.sbt.mipt.oop.homeStructure.SmartHome;
 import ru.sbt.mipt.oop.utils.HomeReader;
 import ru.sbt.mipt.oop.utils.JsonHomeReader;
 
+import java.util.Arrays;
+
 @Configuration
 public class NewAPIConfig {
     @Bean
     SensorEventsManager sensorEventsManager(){
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
         sensorEventsManager.registerEventHandler(
-                getEventHandlerAdapter(getSmartHome(), getSensorEventAdapter())
+                getEventHandlerAdapter(getSmartHome(), getEventConverter())
         );
         return sensorEventsManager;
     }
 
-    private SensorEventAdapter getSensorEventAdapter() {
-        return new EventAdapter();
+    @Bean
+    EventHandler getEventHandlerAdapter(SmartHome smartHome, SensorEventConverter sensorEventAdapter) {
+        return new EventHandlerAdapter(smartHome, sensorEventAdapter);
     }
 
-    private EventHandler getEventHandlerAdapter(SmartHome smartHome, SensorEventAdapter sensorEventAdapter) {
-        return new EventHandlerAdapter(smartHome, sensorEventAdapter);
+    @Bean
+    SensorEventConverter getEventConverter() {
+        return new EventConverter(Arrays.asList(
+                getDoorEventConverter(),
+                getLightEventConverter()
+        ));
+    }
+
+    @Bean
+    SensorEventConverter getDoorEventConverter() {
+        return new DoorEventConverter();
+    }
+
+    @Bean
+    SensorEventConverter getLightEventConverter() {
+        return new LightEventConverter();
     }
 
     @Bean

@@ -5,6 +5,6 @@ package ru.sbt.mipt.oop.adapters;
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import ru.sbt.mipt.oop.SensorEvent;
 
-public interface SensorEventAdapter {
+public interface SensorEventConverter {
     SensorEvent convert(CCSensorEvent event);
 }

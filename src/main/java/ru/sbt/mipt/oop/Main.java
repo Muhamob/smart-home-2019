@@ -4,7 +4,6 @@ import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.sbt.mipt.oop.configs.NewAPIConfig;
-import ru.sbt.mipt.oop.configs.TestConfig;
 
 public class Main {
     public static void main(String[] args) {
